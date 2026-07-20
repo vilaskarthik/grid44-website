@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid 44 — Precision Audio Systems</title>
+<meta name="description" content="Grid 44 designs and hand-assembles high-fidelity headphones, amplifiers, and speaker systems for people who still believe a room can be tuned like an instrument.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111111;
+    --ink-soft:#6e6e6e;
+    --silver:#a9adb3;
+    --silver-bright:#f1f2f3;
+    --silver-deep:#5c6066;
+    --ivory:#ffffff;
+    --ivory-dim:#f3f3f4;
+    --line:#e2e2e4;
+    --radius:14px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--ivory);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:12px;
+    font-weight:600;
+    color:var(--silver-deep);
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:14px 28px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:0.02em;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-brass{
+    background:linear-gradient(180deg, var(--silver-bright), var(--silver) 60%, var(--silver-deep));
+    color:var(--ink);
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+  }
+  .btn-outline{
+    background:transparent;
+    border-color:rgba(17,17,17,.3);
+    color:var(--ink);
+  }
+  .btn-outline:hover{background:rgba(17,17,17,.06);}
+  .btn-dark{
+    background:var(--ink);
+    color:#fff;
+  }
+  .btn-dark:hover{background:var(--silver-deep);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 32px;
+    max-width:var(--maxw); margin:0 auto;
+    color:var(--ink);
+  }
+  .logo-brand{display:flex; flex-direction:column; gap:1px; line-height:1;}
+  .logo-img{height:38px; width:auto; display:block;}
+  .logo-brand.small .logo-img{height:26px;}
+  .navlinks{display:flex; gap:34px; font-size:14px; font-weight:500;}
+  .navlinks a{opacity:.85; transition:opacity .15s, color .15s;}
+  .navlinks a:hover{opacity:1; color:var(--silver-deep);}
+  .navcta{display:flex; align-items:center; gap:18px;}
+  .navtoggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:
+      radial-gradient(ellipse 700px 420px at 20% 10%, rgba(169,173,179,.18), transparent 60%),
+      radial-gradient(ellipse 800px 500px at 82% 30%, rgba(169,173,179,.14), transparent 60%),
+      linear-gradient(180deg, #fff, var(--ivory) 55%, var(--ivory-dim) 100%);
+    color:var(--ink);
+    overflow:hidden;
+    padding:100px 0 90px;
+  }
+  .hero::before{
+    /* faint vertical "shelving" texture reminiscent of a record wall */
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(90deg, rgba(17,17,17,.04) 0 2px, transparent 2px 26px);
+    mask-image:linear-gradient(180deg, transparent, rgba(0,0,0,.9) 30%, rgba(0,0,0,.9) 75%, transparent);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 64px);
+    line-height:1.04;
+    margin:18px 0 22px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    background:linear-gradient(90deg, var(--silver-deep), var(--ink));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{
+    color:var(--ink-soft);
+    font-size:17px;
+    max-width:480px;
+    margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+
+  /* Decorative "system" panel standing in for the product photo — styled like Naim's black studio product shots */
+  .hero-visual{
+    position:relative;
+    border-radius:20px;
+    background:
+      linear-gradient(180deg, #1c1c1e, #050505);
+    border:1px solid #000;
+    box-shadow:0 30px 70px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+    padding:26px;
+  }
+  .hv-row{display:flex; gap:16px; margin-bottom:16px;}
+  .speaker{
+    flex:0 0 74px; height:220px; border-radius:8px;
+    background:linear-gradient(180deg,#0c0c0d,#1c1c1e);
+    border:1px solid #2a2a2c;
+    display:flex; flex-direction:column; align-items:center; justify-content:space-evenly; padding:14px 0;
+  }
+  .cone{border-radius:50%; background:radial-gradient(circle at 35% 30%, var(--silver-bright), var(--silver) 55%, var(--silver-deep) 100%); box-shadow:inset 0 0 0 3px #000;}
+  .cone.lg{width:48px; height:48px;}
+  .cone.md{width:30px; height:30px;}
+  .cone.sm{width:20px; height:20px;}
+  .deck{
+    flex:1;
+    border-radius:10px;
+    background:linear-gradient(180deg,var(--silver-bright),var(--silver) 60%,var(--silver-deep));
+    border:1px solid #000;
+    padding:16px 18px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    color:var(--ink);
+  }
+  .deck-top{display:flex; justify-content:space-between; align-items:center;}
+  .deck-dial{
+    width:16px; height:16px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #fff, var(--silver) 60%, var(--silver-deep));
+  }
+  .deck-meters{
+    display:flex; gap:10px; margin-top:auto;
+    background:#000; border-radius:8px; padding:14px 12px;
+  }
+  .meter{
+    flex:1; height:44px; border-radius:4px; position:relative; overflow:hidden;
+    background:linear-gradient(180deg,#f2f2f3,#d5d6d8);
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);
+  }
+  .meter span{
+    position:absolute; left:50%; bottom:-4px; width:2px; height:34px;
+    background:#000; transform-origin:bottom center; transform:rotate(-22deg);
+  }
+  .meter::after{
+    content:""; position:absolute; inset:0;
+    background-image:repeating-linear-gradient(90deg, rgba(0,0,0,.12) 0 1px, transparent 1px 6px);
+  }
+  .hp-pair{display:flex; justify-content:center; gap:56px; margin-bottom:22px;}
+  .hp-icon{width:78px; height:66px; position:relative;}
+  .hp-band{
+    position:absolute; top:0; left:6px; right:6px; height:52px;
+    border:5px solid var(--silver); border-bottom:none;
+    border-radius:60px 60px 0 0;
+  }
+  .hp-cup{
+    position:absolute; bottom:0; width:20px; height:30px; border-radius:7px;
+    background:linear-gradient(180deg,var(--silver-bright),var(--silver));
+    border:2px solid #000;
+  }
+  .hp-cup.left{left:0;}
+  .hp-cup.right{right:0;}
+  .hv-row.eq{
+    background:linear-gradient(180deg,var(--silver-bright),var(--silver));
+    border-radius:10px; padding:12px 18px; gap:6px; align-items:flex-end; height:64px;
+  }
+  .bar{width:100%; background:linear-gradient(180deg,var(--silver-deep),#000); border-radius:2px;}
+  .hv-caption{
+    text-align:center; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--silver); margin-top:6px;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:96px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); margin-top:14px;}
+  .section-head p{color:var(--ink-soft); margin-top:14px; font-size:16px;}
+
+  /* ---------- FEATURES ---------- */
+  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .feature{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px 24px;
+  }
+  .feature .num{
+    font-family:'Fraunces', serif; font-size:14px; color:var(--silver-deep);
+    border:1px solid var(--silver-deep); width:30px; height:30px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+  }
+  .feature h3{font-size:18px; margin-bottom:8px;}
+  .feature p{font-size:14.5px; color:var(--ink-soft);}
+
+  /* ---------- PRODUCT ---------- */
+  .systems{background:var(--ivory-dim); color:var(--ink);}
+  .systems .section-head p{color:var(--ink-soft);}
+  .product{
+    display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:center;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:44px;
+  }
+  .product-visual{
+    aspect-ratio:1/1; border-radius:14px;
+    background:linear-gradient(180deg, #1c1c1e, #050505);
+    border:1px solid #000;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .product-info .eyebrow{margin-bottom:10px;}
+  .product-info h3{font-size:30px; margin-bottom:8px;}
+  .product-info .tagline{color:var(--ink-soft); font-size:15.5px; margin-bottom:20px; max-width:440px;}
+  .product-info .price{
+    font-family:'Fraunces', serif; font-size:34px; margin-bottom:22px;
+    background:linear-gradient(90deg, var(--silver-deep), var(--ink));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .product-info .price span{font-size:14px; color:var(--ink-soft); font-family:'Inter',sans-serif;}
+  .product-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .coming-soon-badge{
+    position:absolute; top:18px; right:18px;
+    background:var(--silver); color:#000;
+    font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    padding:6px 14px; border-radius:999px;
+  }
+
+  /* ---------- ABOUT / CRAFT ---------- */
+  .about{display:grid; grid-template-columns:.9fr 1.1fr; gap:64px; align-items:center;}
+  .about-visual{
+    aspect-ratio:4/5; border-radius:18px;
+    width:100%; object-fit:cover;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(230,230,232,.25), transparent 55%),
+      linear-gradient(160deg, #1c1c1e, #050505 70%);
+    border:1px solid #000;
+    box-shadow:0 30px 60px rgba(0,0,0,.35);
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-visual::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 34px, transparent 34px 68px);
+  }
+  .about-turntable{
+    position:relative; z-index:1;
+    width:60%;
+    filter:drop-shadow(0 18px 26px rgba(0,0,0,.5));
+  }
+  .quote{
+    font-family:'Fraunces', serif; font-style:italic;
+    font-size:17px; color:var(--ink-soft); line-height:1.6; margin-top:22px;
+    border-left:3px solid var(--silver); padding-left:18px;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--ivory-dim);
+    color:var(--ink);
+  }
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
+  .contact h2{font-size:clamp(28px,3.4vw,40px); margin-bottom:16px;}
+  .contact p.lead{color:var(--ink-soft); margin-bottom:30px; max-width:420px;}
+  .contact-info{display:flex; flex-direction:column; gap:18px; margin-top:8px;}
+  .contact-info div{display:flex; gap:14px; align-items:flex-start; font-size:14.5px;}
+  .contact-info b{display:block; font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--silver-deep);}
+  form{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:30px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  form label{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin-bottom:6px; display:block;}
+  form input, form textarea{
+    width:100%; padding:12px 14px; border-radius:8px;
+    background:var(--ivory-dim); border:1px solid var(--line);
+    color:var(--ink); font-family:'Inter',sans-serif; font-size:14px;
+  }
+  form input::placeholder, form textarea::placeholder{color:rgba(17,17,17,.35);}
+  form textarea{resize:vertical; min-height:100px;}
+  form .btn{margin-top:6px; align-self:flex-start;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ivory-dim); color:var(--ink-soft);
+    padding:44px 0 30px; font-size:13px;
+    border-top:1px solid var(--line);
+  }
+  .footer-grid{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px;}
+  .footer-links{display:flex; gap:24px;}
+  .footer-links a:hover{color:var(--silver-deep);}
+  .foot-bottom{
+    margin-top:26px; padding-top:22px; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; color:rgba(17,17,17,.45);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 920px){
+    .navlinks{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .features{grid-template-columns:repeat(2,1fr);}
+    .product{grid-template-columns:1fr; padding:32px;}
+    .about{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width: 560px){
+    .features{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+    section{padding:64px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#top" class="logo-brand">
+      <img src="grid44-logo.png" alt="Grid 44" class="logo-img">
+    </a>
+    <div class="navlinks">
+      <a href="#systems">Mirage</a>
+      <a href="#craft">Craftsmanship</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="navcta">
+      <a href="#contact" class="btn btn-brass">Book a Listening Session</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Hand-Built Hi-Fi · Est. Studio</div>
+      <h1>Sound, built to be <em>felt</em>, not just heard.</h1>
+      <p class="lead">Grid 44 designs and hand-assembles high-fidelity headphones, amplifiers, and speaker systems for people who still believe a room can be tuned like an instrument.</p>
+      <div class="hero-ctas">
+        <a href="#systems" class="btn btn-brass">Shop Mirage</a>
+        <a href="#contact" class="btn btn-outline">Talk to a Specialist</a>
+      </div>
+    </div>
+    <!--
+      To use your real product photo instead of this illustration:
+      1. Upload your photo to the same GoDaddy folder as this file, e.g. named "hero.jpg"
+      2. Delete everything between <div class="hero-visual"> and its closing </div> below
+      3. Replace it with: <img src="hero.jpg" alt="Grid 44 hi-fi system" style="border-radius:20px; box-shadow:0 30px 70px rgba(0,0,0,.4);">
+    -->
+    <div class="hero-visual">
+      <div class="hp-pair">
+        <div class="hp-icon" aria-hidden="true">
+          <div class="hp-band"></div>
+          <div class="hp-cup left"></div>
+          <div class="hp-cup right"></div>
+        </div>
+        <div class="hp-icon" aria-hidden="true">
+          <div class="hp-band"></div>
+          <div class="hp-cup left"></div>
+          <div class="hp-cup right"></div>
+        </div>
+      </div>
+      <div class="hv-row">
+        <div class="speaker">
+          <div class="cone lg"></div>
+          <div class="cone md"></div>
+          <div class="cone sm"></div>
+        </div>
+        <div class="deck">
+          <div class="deck-top">
+            <div class="deck-dial"></div>
+            <div class="deck-dial"></div>
+            <div class="deck-dial"></div>
+          </div>
+          <div class="deck-meters">
+            <div class="meter"><span></span></div>
+            <div class="meter"><span></span></div>
+          </div>
+        </div>
+        <div class="speaker">
+          <div class="cone lg"></div>
+          <div class="cone md"></div>
+          <div class="cone sm"></div>
+        </div>
+      </div>
+      <div class="hv-row eq">
+        <div class="bar" style="height:35%"></div>
+        <div class="bar" style="height:60%"></div>
+        <div class="bar" style="height:82%"></div>
+        <div class="bar" style="height:48%"></div>
+        <div class="bar" style="height:70%"></div>
+        <div class="bar" style="height:30%"></div>
+        <div class="bar" style="height:55%"></div>
+        <div class="bar" style="height:90%"></div>
+        <div class="bar" style="height:40%"></div>
+        <div class="bar" style="height:65%"></div>
+      </div>
+      <div class="hv-caption">Mirage Series</div>
+    </div>
+  </div>
+</section>
+
+<section id="craft">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Why Grid 44</div>
+      <h2>Every system is tuned before it ever leaves the bench.</h2>
+      <p>We don't box-ship components. Every amplifier is biased, every set of headphone drivers matched, and every speaker pair paired within tolerance — by hand, in-house.</p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="num">01</div>
+        <h3>Hand-Selected Components</h3>
+        <p>Only components we'd put in our own listening rooms make it into a Grid 44 build.</p>
+      </div>
+      <div class="feature">
+        <div class="num">02</div>
+        <h3>Headphones, Amplifiers &amp; DACs</h3>
+        <p>Every headphone, amplifier, and DAC we build is voiced together, so the sound stays honest no matter what's carrying it.</p>
+      </div>
+      <div class="feature">
+        <div class="num">03</div>
+        <h3>Lifetime Support</h3>
+        <p>Free recalibration, ear-pad and driver guidance, and upgrades for as long as you own it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="systems" id="systems">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Mirage — timeless, by design.</h2>
+      <p>Hand-assembled, driver-matched, and voiced on the bench before it ever reaches you.</p>
+    </div>
+    <div class="product">
+      <div class="product-visual" style="position:relative;">
+        <div class="hp-icon" aria-hidden="true" style="width:130px; height:110px;">
+          <div class="hp-band"></div>
+          <div class="hp-cup left" style="width:34px; height:50px;"></div>
+          <div class="hp-cup right" style="width:34px; height:50px;"></div>
+        </div>
+        <div class="coming-soon-badge">Coming Soon</div>
+      </div>
+      <div class="product-info">
+        <div class="eyebrow">Mirage Series</div>
+        <h3>Uncompromising, audiophile-grade headphones.</h3>
+        <p class="tagline">Mirage is being hand-built to the same standard as every system that carries the Grid 44 name — reference-quality sound, tuned by hand, made for listeners who hear the difference. Get in touch to be first in line.</p>
+        <div class="price">Coming Soon</div>
+        <div class="product-ctas">
+          <a href="#contact" class="btn btn-brass">Get Notified</a>
+          <a href="#contact" class="btn btn-outline">Talk to a Specialist</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <!--
+      To use a real photo instead of this illustration:
+      1. Upload your photo to the same folder as this file, e.g. named "about.jpg"
+      2. Delete everything between <div class="about-visual"> and its closing </div> below
+      3. Replace it with: <img class="about-visual" src="about.jpg" alt="Grid 44 hi-fi system in a living room">
+    -->
+    <div class="about-visual">
+      <svg class="about-turntable" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="ttPlatter" cx="35%" cy="30%" r="75%">
+            <stop offset="0" stop-color="#f1f2f3"/>
+            <stop offset="55%" stop-color="#a9adb3"/>
+            <stop offset="100%" stop-color="#3a3d42"/>
+          </radialGradient>
+        </defs>
+        <circle cx="118" cy="132" r="94" fill="url(#ttPlatter)" stroke="#000" stroke-width="2"/>
+        <circle cx="118" cy="132" r="80" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+        <circle cx="118" cy="132" r="66" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+        <circle cx="118" cy="132" r="52" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+        <circle cx="118" cy="132" r="24" fill="#111111" stroke="#000" stroke-width="1"/>
+        <circle cx="118" cy="132" r="4" fill="#f1f2f3"/>
+        <circle cx="198" cy="46" r="10" fill="#111111" stroke="#000"/>
+        <path d="M198 46 C 170 72, 150 90, 128 118" fill="none" stroke="#5c6066" stroke-width="6" stroke-linecap="round"/>
+        <rect x="112" y="110" width="26" height="14" rx="4" transform="rotate(38 125 117)" fill="#111111" stroke="#5c6066" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div>
+      <div class="eyebrow">About Grid 44</div>
+      <h2>Built by people who still stop what they're doing for good sound.</h2>
+      <p style="color:var(--ink-soft); margin-top:16px;">Grid 44 designs and hand-assembles high-fidelity headphones, amplifiers, and speaker systems for people who still believe a room can be tuned like an instrument. Every system we build gets the same treatment on the bench — measured, matched, and listened to before it's ever considered finished.</p>
+      <p class="quote">"We're not chasing spec sheets. We're chasing the moment a room disappears and it's just the music."</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow">Get In Touch</div>
+      <h2>Music, done right.</h2>
+      <p class="lead">Music isn't just heard — it's felt, the way it was meant to be.</p>
+      <div class="contact-info">
+        <div><b>Email</b>info@grid44.com</div>
+      </div>
+    </div>
+    <form id="inquiry-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required>
+      </div>
+      <div>
+        <label for="message">Enquiry</label>
+        <textarea id="message" name="message"></textarea>
+      </div>
+      <button type="submit" class="btn btn-brass">Send Inquiry</button>
+      <p id="form-status" style="font-size:13px; color:var(--ink-soft); display:none;"></p>
+    </form>
+    <script>
+      // Submits via fetch to Formspree so the page doesn't navigate away.
+      // Replace YOUR_FORM_ID above with your real Formspree form ID before going live.
+      (function(){
+        var form = document.getElementById('inquiry-form');
+        var status = document.getElementById('form-status');
+        form.addEventListener('submit', function(e){
+          e.preventDefault();
+          var data = new FormData(form);
+          fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          }).then(function(response){
+            status.style.display = 'block';
+            if (response.ok) {
+              status.textContent = "Thanks — we'll be in touch shortly.";
+              form.reset();
+            } else {
+              status.textContent = "Something went wrong. Please email info@grid44.com directly.";
+            }
+          }).catch(function(){
+            status.style.display = 'block';
+            status.textContent = "Something went wrong. Please email info@grid44.com directly.";
+          });
+        });
+      })();
+    </script>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <a href="#top" class="logo-brand small">
+        <img src="grid44-logo.png" alt="Grid 44" class="logo-img">
+      </a>
+      <div class="footer-links">
+        <a href="#systems">Mirage</a>
+        <a href="#craft">Craftsmanship</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Grid 44 Audio. All rights reserved.</span>
+      <span>Pre-launch — swap in the Formspree form ID before publishing.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
